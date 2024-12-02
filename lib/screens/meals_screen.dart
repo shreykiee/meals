@@ -17,13 +17,13 @@ class MealsScreen extends StatelessWidget {
     );
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    if (meals.isEmpty)
+    if (meals.isEmpty) {
       content = Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Uh oh ...nothing here!'),
-            SizedBox(
+            const Text('Uh oh ...nothing here!'),
+            const SizedBox(
               height: 16,
             ),
             Text(
@@ -34,6 +34,7 @@ class MealsScreen extends StatelessWidget {
           ],
         ),
       );
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
