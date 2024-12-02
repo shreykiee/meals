@@ -12,40 +12,32 @@ class MealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    Widget content = Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Uh oh ... nothing here!',
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: colorScheme.onSurface,
-                ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Try selecting a different category!',
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: colorScheme.onSurface,
-                ),
-          ),
-        ],
-      ),
+    Widget content = ListView.builder(
+      itemBuilder: (context, index) => Text(meals[index].title),
     );
-
-    if (meals.isNotEmpty) {
-      content = ListView.builder(
-        itemCount: meals.length,
-        itemBuilder: (ctx, index) => Text(meals[index].title,
-            style: Theme.of(context).textTheme.bodyLarge),
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    if (meals.isEmpty)
+      content = Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Uh oh ...nothing here!'),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Try selecting a different category!',
+              style:
+                  textTheme.bodyLarge!.copyWith(color: colorScheme.onSurface),
+            )
+          ],
+        ),
       );
-    }
-
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: colorScheme.primary,
           title: Text(title),
+          backgroundColor: colorScheme.primary,
         ),
         body: content);
   }

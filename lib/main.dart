@@ -23,7 +23,7 @@ class App extends StatelessWidget {
         theme: FlexThemeData.light(
             scheme: FlexScheme.mandyRed,
             textTheme: GoogleFonts.latoTextTheme()),
-        home: MealsScreen(
+        home: const MealsScreen(
           title: 'Some Category',
           meals: dummyMeals,
         ));

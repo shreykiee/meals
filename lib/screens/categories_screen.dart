@@ -12,11 +12,11 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        title: Text("pick your category"),
+        title: const Text("pick your category"),
         backgroundColor: colorScheme.primary,
       ),
       body: GridView(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 2,
