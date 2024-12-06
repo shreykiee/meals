@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+enum Filter {
+  glutenFree,
+  lactoseFree,
+  vegetarian,
+  vegan,
+}
+
 class FiltersScreen extends StatefulWidget {
   const FiltersScreen({super.key});
 
@@ -19,73 +26,87 @@ class _FiltersScreenState extends State<FiltersScreen> {
       appBar: AppBar(
         title: Text('Your Filters'),
       ),
-      body: Column(
-        children: [
-          SwitchListTile(
-            value: _glutenFreefilterSet,
-            onChanged: (isChecked) {
-              setState(() {
-                _glutenFreefilterSet = !_glutenFreefilterSet;
-              });
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (didPop) return;
+          Navigator.of(context).pop(
+            {
+              Filter.glutenFree: _glutenFreefilterSet,
+              Filter.lactoseFree: _lactoseFreeFilterSet,
+              Filter.vegetarian: _vegetarianFilterSet,
+              Filter.vegan: _veganFilterSet,
             },
-            title: Text('Gluten-free'),
-            subtitle: Text(
-              'Only include gluten-free meals',
-              style: Theme.of(context).textTheme.labelMedium,
+          );
+        },
+        child: Column(
+          children: [
+            SwitchListTile(
+              value: _glutenFreefilterSet,
+              onChanged: (isChecked) {
+                setState(() {
+                  _glutenFreefilterSet = isChecked;
+                });
+              },
+              title: Text('Gluten-free'),
+              subtitle: Text(
+                'Only include gluten-free meals',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              activeColor: Theme.of(context).colorScheme.tertiary,
+              contentPadding: const EdgeInsets.only(left: 34, right: 22),
+              activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
             ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-            activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
-          ),
-          SwitchListTile(
-            value: _lactoseFreeFilterSet,
-            onChanged: (isChecked) {
-              setState(() {
-                _lactoseFreeFilterSet = !_lactoseFreeFilterSet;
-              });
-            },
-            title: Text('Lactose-free'),
-            subtitle: Text(
-              'Only include Lactose-free meals',
-              style: Theme.of(context).textTheme.labelMedium,
+            SwitchListTile(
+              value: _lactoseFreeFilterSet,
+              onChanged: (isChecked) {
+                setState(() {
+                  _lactoseFreeFilterSet = isChecked;
+                });
+              },
+              title: Text('Lactose-free'),
+              subtitle: Text(
+                'Only include Lactose-free meals',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              activeColor: Theme.of(context).colorScheme.tertiary,
+              contentPadding: const EdgeInsets.only(left: 34, right: 22),
+              activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
             ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-            activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
-          ),
-          SwitchListTile(
-            value: _vegetarianFilterSet,
-            onChanged: (isChecked) {
-              setState(() {
-                _vegetarianFilterSet = !_vegetarianFilterSet;
-              });
-            },
-            title: Text('Vegetarian '),
-            subtitle: Text(
-              'Only include vegetarian meals',
-              style: Theme.of(context).textTheme.labelMedium,
+            SwitchListTile(
+              value: _vegetarianFilterSet,
+              onChanged: (isChecked) {
+                setState(() {
+                  _vegetarianFilterSet = isChecked;
+                });
+              },
+              title: Text('Vegetarian '),
+              subtitle: Text(
+                'Only include vegetarian meals',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              activeColor: Theme.of(context).colorScheme.tertiary,
+              contentPadding: const EdgeInsets.only(left: 34, right: 22),
+              activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
             ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-            activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
-          ),
-          SwitchListTile(
-            value: _veganFilterSet,
-            onChanged: (isChecked) {
-              setState(() {
-                _veganFilterSet = !_veganFilterSet;
-              });
-            },
-            title: Text('Vegan'),
-            subtitle: Text(
-              'Only include Began meals',
-              style: Theme.of(context).textTheme.labelMedium,
+            SwitchListTile(
+              value: _veganFilterSet,
+              onChanged: (isChecked) {
+                setState(() {
+                  _veganFilterSet = isChecked;
+                });
+              },
+              title: Text('Vegan'),
+              subtitle: Text(
+                'Only include Began meals',
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              activeColor: Theme.of(context).colorScheme.tertiary,
+              contentPadding: const EdgeInsets.only(left: 34, right: 22),
+              activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
             ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
-            activeTrackColor: Theme.of(context).colorScheme.tertiaryContainer,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
