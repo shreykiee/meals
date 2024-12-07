@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/providers/favourites_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen(
-      {super.key, required this.meal, required this.ontogglefavourites});
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({super.key, required this.meal});
   final Meal meal;
-  final void Function(Meal) ontogglefavourites;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
               onPressed: () {
-                ontogglefavourites(meal);
-                ;
+                final wasAdded = ref
+                    .read(favouriteMealsProvider.notifier)
+                    .toggleMealFavouriteStatus(meal);
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    padding: EdgeInsets.all(16),
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                    margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    behavior: SnackBarBehavior.floating,
+                    content: Text(
+                      wasAdded
+                          ? 'Added to favourites'
+                          : 'Removed from favourites',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onError),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(80)),
+                  ),
+                );
               },
               icon: const Icon(Icons.star))
         ],
