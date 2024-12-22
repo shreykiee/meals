@@ -10,6 +10,9 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favouriteMeals = ref.watch(favouriteMealsProvider);
+
+    final isFavourite = favouriteMeals.contains(meal);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -22,9 +25,10 @@ class MealDetailsScreen extends ConsumerWidget {
                 ScaffoldMessenger.of(context).clearSnackBars();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     backgroundColor: Theme.of(context).colorScheme.error,
-                    margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 10),
                     behavior: SnackBarBehavior.floating,
                     content: Text(
                       wasAdded
@@ -41,7 +45,7 @@ class MealDetailsScreen extends ConsumerWidget {
                   ),
                 );
               },
-              icon: const Icon(Icons.star))
+              icon: Icon(isFavourite ? Icons.star : Icons.star_border))
         ],
       ),
       body: SingleChildScrollView(
@@ -56,14 +60,14 @@ class MealDetailsScreen extends ConsumerWidget {
               fit: BoxFit.cover,
               width: double.infinity,
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             Text(
               'Ingredients',
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             for (final ingredient in meal.ingredients)
               Text(
                 ingredient,
@@ -72,7 +76,7 @@ class MealDetailsScreen extends ConsumerWidget {
                     .bodyMedium!
                     .copyWith(color: Theme.of(context).colorScheme.onSurface),
               ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             for (final step in meal.steps)
               Padding(
                 padding:

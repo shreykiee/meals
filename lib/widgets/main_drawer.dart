@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meals/screens/tabs.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key, required this.onSelectScreen});

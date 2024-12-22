@@ -13,7 +13,7 @@ class MealItemTraid extends StatelessWidget {
           size: 17,
           color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
-        SizedBox(width: 6),
+        const SizedBox(width: 6),
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium,

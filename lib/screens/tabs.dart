@@ -1,10 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meals/data/dummy_data.dart';
-import 'package:meals/models/meal.dart';
 import 'package:meals/providers/favourites_provider.dart';
-import 'package:meals/providers/meals_provider.dart';
 import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/filters_screen.dart';
 import 'package:meals/screens/meals_screen.dart';
@@ -57,29 +53,13 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     Navigator.of(context).pop();
     if (identifier == 'filters') {
       await Navigator.of(context).push<Map<Filter, bool>>(
-          MaterialPageRoute(builder: (ctx) => FiltersScreen()));
+          MaterialPageRoute(builder: (ctx) => const FiltersScreen()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final _selectedFilters = ref.watch(filtersProvider);
-    final meals = ref.watch(mealsProvider);
-    final availableMeals = meals.where((meal) {
-      if (_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (_selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      if (_selectedFilters[Filter.vegan]! && !meal.isVegan) {
-        return false;
-      }
-      return true;
-    }).toList();
+    final availableMeals = ref.watch(filteredMealsProvider);
     Widget activepage = CategoriesScreen(
       availableMeals: availableMeals,
     );
@@ -92,39 +72,66 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       activepageTitle = 'Your Favourites';
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text(activepageTitle),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      drawer: MainDrawer(onSelectScreen: _setScreen),
-      body: activepage,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
-        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-        selectedLabelStyle:
-            const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        unselectedLabelStyle:
-            TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        showUnselectedLabels: true,
-        showSelectedLabels: true,
-        elevation: 10,
-        onTap: _selectedPage,
-        currentIndex: _selectedPageIndex,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.category,
+        appBar: AppBar(
+          title: Text(activepageTitle),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Theme.of(context).colorScheme.primaryContainer,
+                  Theme.of(context)
+                      .colorScheme
+                      .primaryContainer
+                      .withOpacity(0.8),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              label: "category"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.star,
+            ),
+          ),
+        ),
+        drawer: MainDrawer(onSelectScreen: _setScreen),
+        body: activepage,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).colorScheme.primaryContainer,
+                Theme.of(context).colorScheme.primaryContainer.withOpacity(0.8),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.transparent,
+            selectedItemColor: Theme.of(context).colorScheme.secondaryContainer,
+            unselectedItemColor:
+                Theme.of(context).colorScheme.onPrimaryContainer,
+            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+            elevation: 10,
+            onTap: _selectedPage,
+            currentIndex: _selectedPageIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.category,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+                label: "Category",
               ),
-              label: "Favourite")
-        ],
-      ),
-    );
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.star,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+                label: "Favourites",
+              ),
+            ],
+          ),
+        ));
   }
 }

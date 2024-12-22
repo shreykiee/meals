@@ -25,7 +25,7 @@ class MealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       clipBehavior: Clip.hardEdge,
       elevation: 5,
@@ -73,19 +73,19 @@ class MealItem extends StatelessWidget {
                           icon: Icons.schedule,
                           label: '${meal.duration} min',
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 12,
                         ),
                         MealItemTraid(
                           icon: Icons.work,
-                          label: '${ComplexityText} ',
+                          label: '$ComplexityText ',
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 12,
                         ),
                         MealItemTraid(
                           icon: Icons.attach_money,
-                          label: '${AffordabilityText}',
+                          label: AffordabilityText,
                         )
                       ],
                     )

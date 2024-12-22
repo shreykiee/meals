@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meals/data/dummy_data.dart';
-import 'package:meals/screens/categories_screen.dart';
-import 'package:meals/screens/meals_screen.dart';
 import 'package:meals/screens/tabs.dart';
 
 void main() {
@@ -22,12 +19,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       darkTheme: FlexThemeData.dark(
-          scheme: FlexScheme.blumineBlue,
-          textTheme: GoogleFonts.latoTextTheme()),
+        scheme: FlexScheme.blumineBlue,
+        textTheme: GoogleFonts.latoTextTheme(),
+      ),
       theme: FlexThemeData.light(
-          scheme: FlexScheme.blumineBlue,
-          textTheme: GoogleFonts.latoTextTheme()),
-      home: TabsScreen(),
+        scheme: FlexScheme.blumineBlue,
+        textTheme: GoogleFonts.latoTextTheme(),
+      ),
+      home: const TabsScreen(),
     );
   }
 }
