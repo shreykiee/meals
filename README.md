@@ -1,16 +1,12 @@
 # meals
 
-A new Flutter project.
+A flutter project using RIVERPOD 
 
-## Getting Started
+SCREENSHOTS: 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![WhatsApp Image 2024-12-22 at 12 03 38](https://github.com/user-attachments/assets/8c253501-d8f4-4a75-911a-6729ed33a5a7)
+![WhatsApp Image 2024-12-22 at 12 03 38 (1)](https://github.com/user-attachments/assets/c01302e7-7f83-494d-be2b-95a1bc223911)
+![WhatsApp Image 2024-12-22 at 12 03 26](https://github.com/user-attachments/assets/d51086ae-b302-4ed4-9203-e1ecbee7f2bb)
+![WhatsApp Image 2024-12-22 at 12 03 23 (1)](https://github.com/user-attachments/assets/17b84ada-31a6-4556-847b-5cfab5339cd9)
+![WhatsApp Image 2024-12-22 at 12 03 08](https://github.com/user-attachments/assets/273116c2-1059-4447-a2a7-3a117c1ba58c)
+![WhatsApp Image 2024-12-22 at 12 03 06](https://github.com/user-attachments/assets/9fccc7fa-ee23-41fa-b9cf-8f2b8ee9e04a)
